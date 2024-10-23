@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Freckle+Face&family=Great+Vibes&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(to bottom, #e0f7fa, #b2ebf2);
+            font-family: 'Freckle Face', cursive;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+            position: relative; /* For confetti positioning */
+            overflow: hidden; /* Prevent scrolling */
+        }
+        
+        .text {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            padding: 40px; /* Added padding for better appearance */
+            max-width: 600px; /* Limit text width */
+            text-align: center; /* Center the text inside the box */
+            z-index: 1; /* Ensure text is above confetti */
+        }
+        
+        .button {
+            background-color: #ff4f81;
+            color: white;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 20px; /* Space above button */
+        }
+
+        .button:hover {
+            background-color: #ff1f50;
+        }
+
+        /* Celebration effect */
+        .confetti {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            display: none; /* Hidden by default */
+            z-index: 10; /* Ensure confetti is above everything */
+        }
+
+        .confetti div {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            opacity: 0.8;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100%);
+            }
+            100% {
+                transform: translateY(100vh);
+            }
+        }
+
+        /* Marquee styles */
+        .marquee {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 10s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="text">
+        <h1>Happy Birthday Astha!</h1>
+        <div class="marquee">
+            <div class="marquee-content">
+                <span>Happy Birthday &nbsp;&nbsp;&nbsp;</span>
+                <span>I love you &nbsp;&nbsp;&nbsp;</span>
+                <span>Happy Birthday &nbsp;&nbsp;&nbsp;</span>
+                <span>I love you &nbsp;&nbsp;&nbsp;</span>
+            </div>
+        </div>
+        <p>Wishing you a day filled with love, joy, and all your favorite things!</p>
+        <button class="button" onclick="celebrate()">Celebrate!</button>
+    </div>
+
+    <div class="confetti" id="confetti"></div>
+
+    <script>
+        function randomColor() {
+            const colors = ['#FFC700', '#FF3D00', '#D5006D', '#00C853', '#00B0FF'];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+
+        function celebrate() {
+            const confettiContainer = document.getElementById('confetti');
+            confettiContainer.style.display = 'block'; // Show the confetti container
+
+            // Confetti effect
+            for (let i = 0; i < 100; i++) {
+                const confettiPiece = document.createElement('div');
+                const x = Math.random() * 100; // Random position
+                const animationDuration = Math.random() * 2 + 3; // Random duration
+
+                confettiPiece.style.left = x + 'vw';
+                confettiPiece.style.backgroundColor = randomColor();
+                confettiPiece.style.animationDuration = animationDuration + 's';
+                confettiPiece.style.transitionDelay = Math.random() * 2 + 's';
+                confettiPiece.style.opacity = Math.random(); // Random opacity
+
+                confettiContainer.appendChild(confettiPiece);
+
+                // Remove the confetti piece after animation
+                setTimeout(() => {
+                    confettiPiece.remove();
+                }, (animationDuration + 1) * 1000); // Wait for the animation to finish + 1 second
+            }
+        }
+    </script>
+
+</body>
+</html>
